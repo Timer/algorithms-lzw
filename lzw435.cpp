@@ -5,7 +5,7 @@
 #include "lzw.hpp"
 #include "buffer.hpp"
 
-#define DICTIONARY_BITS 16
+#define DICTIONARY_BITS 12
 
 int main(int argc, char **argv) {
   if (argc != 3) {

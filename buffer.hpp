@@ -60,7 +60,7 @@ public:
     }
   }
 
-  std::string get_buffer() const { return buffer; }
+  std::string & get_buffer() { return buffer; }
 };
 
 class InputBuffer : public Buffer {
