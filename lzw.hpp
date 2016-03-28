@@ -33,7 +33,7 @@ public:
         } else {
           out.write(dictionary[word]);
           if (dictionary_size < dictionary_limit || (variable_dictionary && out.get_word_length() <= dictionary_bits)) {
-            if (dictionary_size >= dictionary_limit) {
+            if (variable_dictionary && dictionary_size >= dictionary_limit) {
               out.set_word_length(out.get_word_length() + 1);
               dictionary_limit *= 2;
             }
@@ -41,7 +41,10 @@ public:
           }
           word = std::string(1, value);
         }
-      } catch (const std::exception &e) { std::cout << e.what() << std::endl; break; }
+      } catch (const std::exception &e) {
+        if (strcmp(e.what(), "buffer underflow")) std::cout << e.what() << std::endl;
+        break;
+      }
     }
     if (!word.empty()) out.write(dictionary[word]);
   }
@@ -50,7 +53,7 @@ public:
 class LZWInflate {
 private:
   std::map<unsigned int, std::string> dictionary;
-  int dictionary_size, dictionary_bits;
+  unsigned int dictionary_size, dictionary_bits;
   bool variable_dictionary;
 
 public:
@@ -75,21 +78,24 @@ public:
           entry = word + word[0];
         } else {
           std::string msg("bad compression ... value encountered: ");
-          msg += value;
+          msg += std::to_string(value);
           msg += ", dict size: ";
-          msg += dictionary_size;
+          msg += std::to_string(dictionary_size);
           throw std::runtime_error(msg);
         }
         for (unsigned char c : entry) out.write(c);
         if (dictionary_size < dictionary_limit || (variable_dictionary && in.get_word_length() <= dictionary_bits)) {
-          if (dictionary_size >= dictionary_limit - 1) {
+          if (variable_dictionary && dictionary_size >= dictionary_limit - 1) {
             in.set_word_length(in.get_word_length() + 1);
             dictionary_limit *= 2;
           }
           dictionary[dictionary_size++] = word + std::string(1, entry[0]);
         }
         word = entry;
-      } catch (const std::exception &e) { std::cout << e.what() << std::endl; break; }
+      } catch (const std::exception &e) {
+        if (strcmp(e.what(), "buffer underflow")) std::cout << e.what() << std::endl;
+        break;
+      }
     }
   }
 };
