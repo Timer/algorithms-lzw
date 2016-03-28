@@ -25,6 +25,7 @@ int main(int argc, char **argv) {
     std::ofstream f2((std::string(argv[2]) + ".lzw2").c_str());
     f2 << out.get_buffer();
     f2.close();
+    std::cout << "File bytes: " << content.length() << " -> " << out.get_buffer().length() << std::endl;
   } else if(!strcmp(argv[1], "e")) {
     std::cout << "Expanding " << argv[2] << " ..." << std::endl;
     std::ifstream f(argv[2]);
@@ -40,6 +41,7 @@ int main(int argc, char **argv) {
     std::ofstream f2(output_name.c_str());
     f2 << out.get_buffer();
     f2.close();
+    std::cout << "File bytes: " << content.length() << " -> " << out.get_buffer().length() << std::endl;
   } else {
     std::cout << "Unknown mode `" << argv[1] <<  '`' << std::endl;
     return 1;
