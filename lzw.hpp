@@ -81,6 +81,12 @@ public:
           msg += std::to_string(value);
           msg += ", dict size: ";
           msg += std::to_string(dictionary_size);
+          msg += ", dict limit: ";
+          msg += std::to_string(dictionary_limit);
+          msg += ", dict bits: ";
+          msg += std::to_string(dictionary_bits);
+          msg += ", input bits: ";
+          msg += std::to_string(in.get_word_length());
           throw std::runtime_error(msg);
         }
         for (unsigned char c : entry) out.write(c);
