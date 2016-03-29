@@ -32,7 +32,7 @@ public:
           word = prefix;
         } else {
           out.write(dictionary[word]);
-          if (dictionary_size < dictionary_limit || (variable_dictionary && out.get_word_length() <= dictionary_bits)) {
+          if (dictionary_size < dictionary_limit || (variable_dictionary && out.get_word_length() < dictionary_bits)) {
             if (variable_dictionary && dictionary_size >= dictionary_limit) {
               out.set_word_length(out.get_word_length() + 1);
               dictionary_limit *= 2;
@@ -90,8 +90,8 @@ public:
           throw std::runtime_error(msg);
         }
         for (unsigned char c : entry) out.write(c);
-        if (dictionary_size < dictionary_limit || (variable_dictionary && in.get_word_length() <= dictionary_bits)) {
-          if (variable_dictionary && dictionary_size >= dictionary_limit - 1) {
+        if (dictionary_size < dictionary_limit || (variable_dictionary && in.get_word_length() < dictionary_bits)) {
+          if (variable_dictionary && dictionary_size >= dictionary_limit - 1 && in.get_word_length() < dictionary_bits) {
             in.set_word_length(in.get_word_length() + 1);
             dictionary_limit *= 2;
           }
