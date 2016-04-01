@@ -1,6 +1,7 @@
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
+#include <cstring>
 #include <cstddef>
 #include "lzw.hpp"
 #include "buffer.hpp"

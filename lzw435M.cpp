@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <cstddef>
+#include <cstring>
 #include "lzw.hpp"
 #include "buffer.hpp"
 
