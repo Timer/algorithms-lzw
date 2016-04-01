@@ -1,3 +1,11 @@
+/**
+ * lzw435.hpp
+ *
+ * An interface for 12-bit LZW encryption.
+ *
+ * @author: Joseph Haddad
+ */
+
 #include <fstream>
 #include <iostream>
 #include <cstdlib>

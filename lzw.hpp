@@ -1,3 +1,12 @@
+/**
+ * lzw.hpp
+ *
+ * A class which implements the LZW algorithm.
+ * Allows specification of dictionary size and togglable variable length.
+ *
+ * @author: Joseph Haddad
+ */
+
 #ifndef LZW_HPP
 #define LZW_HPP
 

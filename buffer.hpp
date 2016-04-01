@@ -1,3 +1,12 @@
+/**
+ * buffer.hpp
+ *
+ * A buffer which can read and write variable bit lengths
+ * from a string.
+ *
+ * @author: Joseph Haddad
+ */
+
 #ifndef BUFFER_HPP
 #define BUFFER_HPP
 
